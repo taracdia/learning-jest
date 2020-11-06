@@ -1,3 +1,5 @@
+const filterByTerm = require("../src/filterByTerm");
+
 describe("Filter function", () => {
     test("should filter by search term", () => {
         const input = [
@@ -14,16 +16,6 @@ describe("Filter function", () => {
         expect(filterByTerm(input, "uRl")).toEqual([{ id: 1, url: "https://www.url1.dev" },
         { id: 2, url: "https://www.url2.dev" }]);
 
-        expect(filterByTerm(input, "")).toEqual([]);
-
-
+        expect(filterByTerm(input, "")).toEqual(new Error("searchTerm cannot be empty"));
     });
 });
-
-filterByTerm = (inputArr, searchTerm) => {
-    if(searchTerm){
-        return inputArr.filter(item => item.url.match(new RegExp(searchTerm, "i")));
-    } else {
-        return [];
-    }
-}
